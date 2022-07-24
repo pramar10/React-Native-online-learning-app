@@ -16,23 +16,22 @@ import {
   TextButton,
 } from '../../components';
 import {COLORS, FONTS, SIZES, icons, images} from '../../constants';
-import {connect} from 'react-redux'
-import { toggleTheme } from '../../stores/themeAction';
+import {connect} from 'react-redux';
+import {toggleTheme} from '../../stores/themeAction';
 
-const Profile = ({appTheme,toggleTheme}) => {
+const Profile = ({appTheme, toggleTheme}) => {
   const [newCourseNotification, setNewCourseNotification] =
     React.useState(false);
   const [studyReminder, setStudyReminder] = React.useState(false);
 
-// Handler
-const toggleThemeHandler =() =>{
-  if(appTheme?.name == 'light')
-  {
-    toggleTheme('dark')
-  }else{
-    toggleTheme('light')
-  }
-}
+  // Handler
+  const toggleThemeHandler = () => {
+    if (appTheme?.name == 'light') {
+      toggleTheme('dark');
+    } else {
+      toggleTheme('light');
+    }
+  };
 
   const renderHeader = () => {
     return (
@@ -46,11 +45,15 @@ const toggleThemeHandler =() =>{
         <Text
           style={{
             ...FONTS.h1,
-            color:appTheme?.textColor,
+            color: appTheme?.textColor,
           }}>
           Profile
         </Text>
-        <IconButton icon={icons.sun} iconStyle={{tintColor:appTheme?.tintColor }} onPress={()=>toggleThemeHandler()} />
+        <IconButton
+          icon={icons.sun}
+          iconStyle={{tintColor: appTheme?.tintColor}}
+          onPress={() => toggleThemeHandler()}
+        />
       </View>
     );
   };
@@ -63,7 +66,7 @@ const toggleThemeHandler =() =>{
           paddingHorizontal: SIZES.radius,
           paddingVertical: 20,
           borderRadius: SIZES.radius,
-          backgroundColor: appTheme?.backgroundColor2 ,
+          backgroundColor: appTheme?.backgroundColor2,
         }}>
         {/* PROFILE imag */}
         <TouchableOpacity
@@ -118,7 +121,9 @@ const toggleThemeHandler =() =>{
             marginLeft: SIZES.radius,
             alignItems: 'flex-start',
           }}>
-          <Text style={{color: COLORS.white, ...FONTS.h2}}>By Programmers</Text>
+          <Text style={{color: COLORS.white, ...FONTS.h2}}>
+            By Prashant Singh
+          </Text>
           <Text style={{color: COLORS.white, ...FONTS.body4}}>
             Full Stack Developer
           </Text>
@@ -142,10 +147,10 @@ const toggleThemeHandler =() =>{
               marginTop: SIZES.padding,
               paddingHorizontal: SIZES.radius,
               borderRadius: 20,
-              backgroundColor: appTheme?.backgroundColor4 ,
+              backgroundColor: appTheme?.backgroundColor4,
             }}
             labelStyle={{
-              color:appTheme?.textColor2 ,
+              color: appTheme?.textColor2,
             }}
           />
         </View>
@@ -155,7 +160,11 @@ const toggleThemeHandler =() =>{
   const renderProfileSection1 = () => {
     return (
       <View style={styles.profileSectionContainer}>
-        <ProfileValue icon={icons.profile} label="Name" value="ByProgrammers" />
+        <ProfileValue
+          icon={icons.profile}
+          label="Name"
+          value="Prashant Singh"
+        />
         <LineDivider />
         <ProfileValue
           icon={icons.email}
@@ -235,17 +244,17 @@ const styles = StyleSheet.create({
     borderColor: COLORS.gray20,
   },
 });
-function mapStateToProps(state){
- return{
-  appTheme: state.appTheme,
-  error:state.error
- } 
+function mapStateToProps(state) {
+  return {
+    appTheme: state.appTheme,
+    error: state.error,
+  };
 }
-function mapDispatchToProps(dispatch){
-  return{
-    toggleTheme:(themeType)=>{
-      return dispatch(toggleTheme(themeType))
-    }
-  }
+function mapDispatchToProps(dispatch) {
+  return {
+    toggleTheme: themeType => {
+      return dispatch(toggleTheme(themeType));
+    },
+  };
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
