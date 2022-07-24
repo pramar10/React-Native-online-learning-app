@@ -10,11 +10,10 @@ import {
   VerticalCourseCard,
 } from '../../components';
 import {COLORS, FONTS, SIZES, icons, images, dummyData} from '../../constants';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const Home = () => {
-
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const renderStartLearing = () => {
     return (
       <ImageBackground
@@ -38,7 +37,7 @@ const Home = () => {
               color: COLORS.white,
               ...FONTS.body4,
             }}>
-            By Scott Harris{' '}
+            By H C Verma
           </Text>
         </View>
         {/* image */}
@@ -65,6 +64,7 @@ const Home = () => {
     );
   };
   const renderHeader = () => {
+    const date = new Date();
     return (
       <View
         style={{
@@ -76,11 +76,9 @@ const Home = () => {
         }}>
         {/* Greetings */}
         <View style={{flex: 1}}>
-          <Text style={{...FONTS.h2, color: COLORS.black}}>
-            Hello,ByProgrammers!
-          </Text>
+          <Text style={{...FONTS.h2, color: COLORS.black}}>Spurna</Text>
           <Text style={{color: COLORS.gray50, ...FONTS.body3}}>
-            Thursday , 9th Sept 2021
+            {date.toDateString()}
           </Text>
         </View>
         <IconButton
@@ -155,14 +153,19 @@ const Home = () => {
           }}
           renderItem={({item, index}) => (
             <CategoryCard
-             sharedElementPrefix ='Home'
+              sharedElementPrefix="Home"
               category={item}
               containerStyle={{
                 marginLeft: index == 0 ? SIZES.padding : SIZES.base,
                 marginRight:
                   index == dummyData.categories.length - 1 ? SIZES.padding : 0,
               }}
-              onPress={()=>navigation.navigate('CourseListing',{category:item,sharedElementPrefix:'Home'})}
+              onPress={() =>
+                navigation.navigate('CourseListing', {
+                  category: item,
+                  sharedElementPrefix: 'Home',
+                })
+              }
             />
           )}
         />
@@ -170,43 +173,38 @@ const Home = () => {
     );
   };
 
-  const renderPopularCourses =() =>{
-    return(
-       <Section
-       title={'Popular Couses'}
-       containerStyle={{
-        marginTop:30
-       }}
-       >
-        <FlatList 
-        data ={dummyData.courses_list_2}
-        listKey="PopularCourses"
-        scrollEnabled={false}
-        keyExtractor  = {item =>`PopularCourses-${item.id}`}
-        contentContainerStyle ={{
-          marginTop:SIZES.radius,
-          paddingHorizontal:SIZES.padding
-        }}
-        renderItem ={({item,index})=>(
-          <HorizontalCourseCard
-            course={item}
-            containerStyle ={{
-              marginVertical:SIZES.padding,
-              marginTop:index == 0? SIZES.radius : SIZES.padding
-            }}
-          />
-        )}
-        ItemSeparatorComponent ={()=>(
-          <LineDivider
-          lineStyle={{backgroundColor:COLORS.gray20 }}
-          />
-        )}
-        
+  const renderPopularCourses = () => {
+    return (
+      <Section
+        title={'Popular Couses'}
+        containerStyle={{
+          marginTop: 30,
+        }}>
+        <FlatList
+          data={dummyData.courses_list_2}
+          listKey="PopularCourses"
+          scrollEnabled={false}
+          keyExtractor={item => `PopularCourses-${item.id}`}
+          contentContainerStyle={{
+            marginTop: SIZES.radius,
+            paddingHorizontal: SIZES.padding,
+          }}
+          renderItem={({item, index}) => (
+            <HorizontalCourseCard
+              course={item}
+              containerStyle={{
+                marginVertical: SIZES.padding,
+                marginTop: index == 0 ? SIZES.radius : SIZES.padding,
+              }}
+            />
+          )}
+          ItemSeparatorComponent={() => (
+            <LineDivider lineStyle={{backgroundColor: COLORS.gray20}} />
+          )}
         />
-
-       </Section>
-    )
-  }
+      </Section>
+    );
+  };
 
   return (
     <View style={{backgroundColor: COLORS.white, flex: 1}}>
@@ -216,7 +214,7 @@ const Home = () => {
       {/* contentSection */}
 
       <ScrollView
-        contentContainerStyle={{flexGrow:1,paddingBottom:150}}
+        contentContainerStyle={{flexGrow: 1, paddingBottom: 150}}
         showsVerticalScrollIndicator={false}>
         {/* Start Learing */}
         {renderStartLearing()}
